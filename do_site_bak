@@ -1,0 +1,27 @@
+#!/bin/bash
+
+function path_site {
+	echo "Numero parametri: $numero_parametri"
+        i=1;
+        for par in $parametri
+        do
+                echo "parametro $i: $par";
+                i=$((i + 1));
+        done
+
+}
+
+
+# def variabili
+# -------------------------------------------
+numero_parametri=$#
+parametri=$@
+# -------------------------------------------
+
+if [ $# = 0 ]
+then 
+	echo " -- exit --"
+else
+	path_site
+fi
+

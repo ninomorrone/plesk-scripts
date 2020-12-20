@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# definizioni  varianili
+USER="admin"
+PASS=`cat /etc/psa/.psa.shadow`
+ODIR="bak-db" #folder temporanea per mysql
+LINE="----------------------------------------"
+
+clear
+echo "[ MySQL backup ]"
+echo $LINE
+
+rm -rf $ODIR
+
+mysql -u $USER -p$PASS -e "show databases" \
+    | grep -Ev 'Database|information_schema|performance_schema|mysql|phpmyadmin|horde|apsc|roundcubemail' \
+    | while read dbname;
+do
+  echo " ... dumping $dbname"
+  mkdir -p $ODIR
+  mysqldump -u $USER -p$PASS $dbname > ./$ODIR/$dbname.sql
+done
+tar czf $ODIR.tar.gz $ODIR
+rm -rf $ODIR
+echo $LINE
+echo "[ MySQL backup ] OK"
+echo " "
