@@ -49,14 +49,18 @@ do
 
         if [ $sitepath == "httpdocs" ]
         then
-                tar czf $DCUR/$OWWW/$dominio.tar.gz $dominio/$sitepath
+		cd $dominio/$sitepath
+                # tar czf $DCUR/$OWWW/$dominio.tar.gz $dominio/$sitepath
 
         else
                 # dominio=$(expr match "$dominio" '.*\.\(.*\..*\)') # elimina il III livello dal dominio
                 topdominio=${dominio#*.}  # altro metodo per il III livello
                 subsitepath=${hfolder#"$SITI$topdominio/"}
-                tar czf $DCUR/$OWWW/$dominio.tar.gz $topdominio/$subsitepath
+		cd $topdominio/$subsitepath
+                #tar czf $DCUR/$OWWW/$dominio.tar.gz $topdominio/$subsitepath
         fi
+	
+	tar czf $DCUR/$OWWW/$dominio.tar.gz *
 
 done
 
