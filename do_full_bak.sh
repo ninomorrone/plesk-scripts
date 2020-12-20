@@ -17,7 +17,7 @@ echo $LINE
 rm -rf $ODIR $OWWW bak
 
 mysql -u $USER -p$PASS -e "show databases" \
-    | grep -Ev 'Database|information_schema|performance_schema|mysql|psa|phpmyadmin|horde|apsc|roundcubemail' \
+    | grep -Ev 'Database|information_schema|performance_schema|mysql|phpmyadmin|horde|apsc|roundcubemail' \
     | while read dbname;
 do
   echo " ... dumping $dbname"
